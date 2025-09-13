@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create",
+            "type": "shell",
+            "command": "git config user.name | ForEach-Object { $username = $_; $branchName = $username; if(git branch --list $branchName) { $branchName = \"$username-$((Get-Random).ToString())\"; }; git checkout -b $branchName 2>$null; if($LASTEXITCODE -ne 0) { git checkout $branchName; } }"
+        },
+        {
+            "label": "Sync",
+            "type": "shell",
+            "command": "git fetch --all --prune; git fetch --tags --prune; git push"
+        },
+        {
+            "label": "Rebase",
+            "type": "shell",
+            "command": "git fetch --all --prune; git fetch --tags --prune; git push"
+        }
+    ]
+}
